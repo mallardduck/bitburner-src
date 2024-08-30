@@ -11,6 +11,7 @@ import {
 } from "./Hacking";
 import { netscriptCanGrow, netscriptCanWeaken } from "./Hacking/netscriptCanHack";
 import { Terminal } from "./Terminal";
+import { Link } from "./Terminal/OutputTypes";
 import { Player } from "@player";
 import {
   CityName,
@@ -622,6 +623,19 @@ export const ns: InternalAPI<NSFull> = {
     server.hasAdminRights = true;
     helpers.log(ctx, () => `Executed NUKE.exe virus on '${server.hostname}' to gain root access.`);
     return true;
+  },
+  autolink: (ctx) => (_hostname) => {
+    const hostname = helpers.string(ctx, "hostname", _hostname);
+    const server = helpers.getServer(ctx, hostname);
+    if (!(server instanceof Server)) {
+      helpers.log(ctx, () => "Cannot be executed on this server.");
+      return hostname;
+    }
+    if (!Player.hasProgram(CompletedProgramName.autoLink)) {
+      throw helpers.errorMessage(ctx, "You do not have the AutoLink.exe program!");
+    }
+
+    return (new Link('', hostname));
   },
   brutessh: (ctx) => (_hostname) => {
     const hostname = helpers.string(ctx, "hostname", _hostname);

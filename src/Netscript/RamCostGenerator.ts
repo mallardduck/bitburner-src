@@ -511,6 +511,7 @@ export const RamCosts: RamCostTree<NSFull> = {
   getScriptLogs: 0,
   hasTorRouter: 0.05,
   nuke: RamCostConstants.PortProgram,
+  autoLink: RamCostConstants.PortProgram,
   brutessh: RamCostConstants.PortProgram,
   ftpcrack: RamCostConstants.PortProgram,
   relaysmtp: RamCostConstants.PortProgram,
